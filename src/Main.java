@@ -19,29 +19,34 @@ public class Main {
                 try {
                     input = scanner.nextInt();
 
-                    //too large check
+                    //too big check
                     if (input >= 100 && !s.equals("How many bombs?")) {
-                        System.out.println("Input too large(4-99)");
+                        System.out.println("Input too big(4-99)");
+                        continue;
+                    }
+                    //too big check - bombs
+                    if ((width * height) - 9 < bombs) {
+                        System.out.println("Input too big(1-" + ((width * height) - 9) + ")");
                         continue;
                     }
 
                     //too small check
-                    if (input <= 3) {
-                        System.out.println("Input too small" + (s.equals("How many bombs?") ? "" : "(4-99)"));
+                    if (input <= 3 && !s.equals("How many bombs?")) {
+                        System.out.println("Input too small(4-99)");
+                        continue;
+                    }
+                    //too small check - bombs
+                    if (input <= 0) {
+                        System.out.println("Input too big(1-" + ((width * height) - 9) + ")");
                         continue;
                     }
 
                     switch (s) {
                         case "Width?" -> width = input;
                         case "Height?" -> height = input;
-                        case "How many bombs?" -> {
-                            bombs = input;
-                            if ((width * height) - 9 < bombs) {
-                                System.out.println("Too many bombs!");
-                                continue;
-                            }
-                        }
+                        case "How many bombs?" -> bombs = input;
                     }
+
                     success = true;
                 } catch (Exception ignored) {
                     System.out.println("Input needs to be a number!");
