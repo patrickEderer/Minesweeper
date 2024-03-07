@@ -25,7 +25,7 @@ public class Main {
                         continue;
                     }
                     //too big check - bombs
-                    if ((width * height) - 9 < bombs && s.equals("How many bombs?")) {
+                    if ((width * height) - 9 < input && s.equals("How many bombs?")) {
                         System.out.println("Input too big(1-" + ((width * height) - 9) + ")");
                         continue;
                     }
