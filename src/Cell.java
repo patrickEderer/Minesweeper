@@ -8,10 +8,6 @@ public class Cell {
     public Cell() {
     }
 
-    public int getNumber() {
-        return number;
-    }
-
     public void setNumber(int number) {
         if (!isBomb) this.number = number;
     }
