@@ -28,7 +28,7 @@ public class Minesweeper {
 
         //game loop
         do {
-            draw(false);
+            draw();
 
             System.out.println("Field?");
 
@@ -105,20 +105,23 @@ public class Minesweeper {
         }
     }
 
-    private void draw(boolean bombs) {
+    private void draw() {
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  ");
+        //first line
         for (int i = 0; i < board[0].length; i++) {
             System.out.print("+-" + (i + 1) + (i >= 9 ? "" : "-"));
         }
         for (int i = 0; i < board.length; i++) {
             System.out.print("+\n");
-            System.out.print((i + 1) + (i >= 9 ? "| " : " | "));
+
+            //cell line - start
+            System.out.print((i + 1) + (i >= 9 ? "|" : " |"));
+            //cell line - cells
             for (Cell cell : board[i]) {
-                if (bombs)
-                    System.out.print((cell.isRevealed ? (cell.number != 0 ? cell.number + " " : (cell.isBomb ? "\uD83D\uDCA3" : "  ")) : (cell.isMarked ? "⚑ " : "█ ")) + "| ");
-                else
-                    System.out.print((cell.isRevealed ? (cell.number != 0 ? cell.number + " " : "  ") : (cell.isMarked ? "⚑ " : "█ ")) + "| ");
+                System.out.print((cell.isRevealed ? (cell.number != 0 ? " " + cell.number + " " : (cell.isBomb ? " \uD83D\uDCA3 " : "   ")) : (cell.isMarked ? " ⚑ " : " █ ")) + "|");
             }
+
+            //separator line
             System.out.print("\n  ");
             for (int j = 0; j < board[i].length; j++) {
                 System.out.print("+---");
@@ -155,6 +158,7 @@ public class Minesweeper {
     }
 
     private boolean checkWin() {
+        //check if there is no a bomb that isn't marked
         for (Cell[] cells : board) {
             for (Cell cell : cells) {
                 if (cell.isBomb && !cell.isMarked) return false;
@@ -171,7 +175,7 @@ public class Minesweeper {
             }
         }
 
-        draw(true);
+        draw();
 
         System.out.println(won ? "You won!" : "You lost!");
         started = false;
